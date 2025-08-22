@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    lang="pt-br">
+
+    <head th:include="layout :: htmlhead"></head>
+
+    <body>
+        <nav th:replace="layout :: menu">(menu)</nav>
+        <main class="container">
+            <form th:action="@{/clientes}"
+                method="POST"
+                th:object="${cliente}">
+
+                <input type="hidden" th:field="*{id}">
+                <br>
+                <div class="container text-left">
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group">
+                            <label for="txtNome"><b>NOME:</b></label>
+                            <input type="text" class="form-control" style="border: 1.2px solid; border-color: #4F2867;"
+                            th:field="*{nome}" id="txtNome">
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group">
+                            <label for="txtTelefone"><b>TELEFONE:</b></label>
+                            <input type="text" class="form-control" style="border: 1.2px solid; border-color: #4F2867;"
+                                th:field="*{telefone}" id="txtTelefone">
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <br>
+                <div class="container text-center">
+                    <button type="submit" class="btn btn-primary" style="background-color: #4F2867; color: white; border-color: #4F2867;">
+                        <b>Cadastrar Cliente</b>
+                    </button>
+                </div>
+
+            </form>
+        </main>
+        <div th:include="layout :: footer">(footer)</div>
+    </body>
+</html>

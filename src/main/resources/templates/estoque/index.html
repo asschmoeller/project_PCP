@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:include="layout :: htmlhead">
+</head>
+
+<body>
+  <nav th:replace="layout :: menu">(menu)</nav>
+  <main>
+
+    <br>
+
+    <div class="container overflow-hidden text-center"
+      style="font-weight: bold; background-color: #F2EDE8; text-align: center; width: 20%; margin:auto; border: 1px solid #9A9A9A; border-radius: 5px; height: 40px; display: flex; align-items: center; justify-content: center;">
+      ESTOQUE
+    </div>
+
+
+    <br>
+
+    <div class="container text-center" style="max-width: 600px; margin-top: 50px;">
+      <div class="row align-items-center">
+        <div class="col px-3">
+          <a href="/clientes"><img src="movimentoEstoque.png" class="img-thumbnail" alt="clientes"></a>
+          <p style="font-weight: bold; font-size: 12px;">MOVIMENTAÇÕES DE ESTOQUE</p>
+        </div>
+        <div class="col px-3">
+          <a href="/clientes"><img src="consultaEstoque.png" class="img-thumbnail" alt="clientes"></a>
+          <p style="font-weight: bold; font-size: 12px;">CONSULTAS DE ESTOQUE</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+  <div th:include="layout :: footer">(footer)</div>
+  <script th:src="@{/ClienteScript.js}"></script>
+</body>
+
+</html>
