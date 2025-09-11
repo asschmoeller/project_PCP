@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+
+<head th:include="layout :: htmlhead"></head>
+
+<body>
+    <nav th:replace="layout :: menu">(menu)</nav>
+    <main class="container">
+        <form th:action="@{/materiasPrimas}" method="POST" th:object="${materiaPrima}">
+
+            <input type="hidden" th:field="*{id}">
+            <br>
+            <div class="container text-left">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtNome"><b>NOME DA MATÉRIA-PRIMA:</b></label>
+                            <input type="text" class="form-control" style="border: 1.2px solid; border-color: #F5821F;"
+                                th:field="*{nomeMateriaPrima}" id="txtNome" required>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="unidadeMedida"><b>UNIDADE DE MEDIDA:</b></label>
+                            <select th:field="*{unidadeMedida}" class="form-control" id="unidadeMedida">
+                                <option value="" disabled selected>Selecione</option>
+                                <option th:each="u : ${unidades}" th:value="${u}" th:text="${u.label}">Unidade</option>
+                            </select>
+                            <div th:if="${#fields.hasErrors('unidadeMedida')}" th:errors="*{unidadeMedida}"
+                                class="text-danger"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtPrecoAtual"><b>PREÇO ATUAL:</b></label>
+                            <input type="number" step="any" class="form-control"
+                                style="border: 1.2px solid; border-color: #F5821F;" th:field="*{precoAtual}"
+                                id="txtPrecoAtual" required>
+                            <div th:if="${#fields.hasErrors('precoAtual')}" th:errors="*{precoAtual}"
+                                class="text-danger"></div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtQuantidadeAtual"><b>QUANTIDADE ATUAL:</b></label>
+                            <input type="number" step="1" class="form-control"
+                                style="border: 1.2px solid; border-color: #F5821F;" th:field="*{quantidadeAtual}"
+                                id="txtQuantidadeAtual" required>
+                            <div th:if="${#fields.hasErrors('quantidadeAtual')}" th:errors="*{quantidadeAtual}"
+                                class="text-danger"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtFornecedorPrincipal"><b>FORNECEDOR PRINCIPAL:</b></label>
+                            <input type="text" class="form-control" style="border: 1.2px solid; border-color: #F5821F;"
+                                th:field="*{fornecedorPrincipal}" id="txtFornecedorPrincipal" required>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtDataUltimaCompra"><b>Data da Última Compra:</b></label>
+                            <input type="date" class="form-control" style="border: 1.2px solid; border-color: #F5821F;"
+                                th:field="*{dataUltimaCompra}" id="txtDataUltimaCompra" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtEstoqueMinimo"><b>Estoque Mínimo:</b></label>
+                            <input type="number" step="1" class="form-control"
+                                style="border: 1.2px solid; border-color: #F5821F;" th:field="*{estoqueMinimo}"
+                                id="txtEstoqueMinimo" required>
+                            <div th:if="${#fields.hasErrors('estoqueMinimo')}" th:errors="*{estoqueMinimo}"
+                                class="text-danger"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="container text-center">
+                <button type="submit" class="btn btn-primary"
+                    style="background-color: #F5821F; color: white; border-color: #F5821F;">
+                    <b>Cadastrar Matéria-Prima</b>
+                </button>
+            </div>
+
+        </form>
+    </main>
+    <div th:include="layout :: footer">(footer)</div>
+</body>
+
+</html>

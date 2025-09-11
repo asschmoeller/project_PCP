@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+
+<head th:include="layout :: htmlhead"></head>
+
+<body>
+    <nav th:replace="layout :: menu">(menu)</nav>
+    <main class="container">
+        <form th:action="@{/produtos}" method="POST" th:object="${produto}">
+
+            <input type="hidden" th:field="*{id}">
+            <br>
+            <div class="container text-left">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtNome"><b>NOME DO PRODUTO:</b></label>
+                            <input type="text" class="form-control" style="border: 1.2px solid; border-color: #F5821F;"
+                                th:field="*{nomeProduto}" id="txtNome" required>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtDescricao"><b>DESCRIÇÃO:</b></label>
+                            <input type="text" class="form-control" style="border: 1.2px solid; border-color: #F5821F;"
+                                th:field="*{descricao}" id="txtDescricao">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="unidadeMedida"><b>UNIDADE DE MEDIDA:</b></label>
+                            <select th:field="*{unidadeMedida}" class="form-control" id="unidadeMedida">
+                                <option value="" disabled selected>Selecione</option>
+                                <option th:each="u : ${unidades}" th:value="${u}" th:text="${u.label}">Unidade</option>
+                            </select>
+                            <div th:if="${#fields.hasErrors('unidadeMedida')}" th:errors="*{unidadeMedida}"
+                                class="text-danger"></div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtCategoria"><b>CATEGORIA:</b></label>
+                            <input type="text" class="form-control" style="border: 1.2px solid; border-color: #F5821F;"
+                                th:field="*{categoria}" id="txtCategoria" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtStatus"><b>STATUS:</b></label>
+                            <select th:field="*{status}" class="form-select" aria-label="Default select example"
+                                style="border: 1.2px solid; border-color: #F5821F;" required>
+                                <option value="">Selecione</option>
+                                <option value="Ativo">Ativo</option>
+                                <option value="Inativo">Inativo</option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtMateriaPrima"><b>MATÉRIA-PRIMA:</b></label>
+                            <select id="materiasPrimas" class="form-select" name="materiasPrimasIds" multiple>
+                                <option th:each="mp : ${listaMateriaPrima}" th:value="${mp.id}"
+                                    th:text="${mp.nomeMateriaPrima}"
+                                    th:selected="${produto.materiasPrimas != null and produto.materiasPrimas.contains(mp)}">
+                                </option>
+                            </select>
+                            <div id="materiasSelecionadas" class="mt-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="materiasSelecionadas" class="mt-2"></div>
+            <br>
+            <div class="container text-center">
+                <button type="submit" class="btn btn-primary"
+                    style="background-color: #F5821F; color: white; border-color: #F5821F;">
+                    <b>Cadastrar Produto</b>
+                </button>
+            </div>
+
+        </form>
+    </main>
+    <div th:include="layout :: footer">(footer)</div>
+    <script th:src="@{/ProdutoScript.js}"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+
+<head th:include="layout :: htmlhead"></head>
+
+<body>
+    <nav th:replace="layout :: menu">(menu)</nav>
+    <main class="container">
+        <form th:action="@{/equipamentos}" method="POST" th:object="${equipamento}">
+
+            <input type="hidden" th:field="*{id}">
+            <br>
+            <div class="container text-left">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtNome"><b>NOME DO EQUIPAMENTO:</b></label>
+                            <input type="text" class="form-control" style="border: 1.2px solid; border-color: #F5821F;"
+                                th:field="*{nomeEquipamento}" id="txtNome" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtProduto"><b>PRODUTOS PRODUZIDOS:</b></label>
+                        <select id="produtos" class="form-select" name="produtosIds" multiple>
+                            <option th:each="mp : ${listaProduto}" th:value="${mp.id}"
+                                th:text="${mp.nomeProduto}"
+                                th:selected="${equipamento.produtos != null and equipamento.produtos.contains(mp)}">
+                            </option>
+                        </select>
+                        <div id="produtosSelecionados" class="mt-2"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtCapacidadeProdutiva"><b>CAPACIDADE PRODUTIVA:</b></label>
+                            <input type="number" class="form-control"
+                                style="border: 1.2px solid; border-color: #F5821F;" th:field="*{capacidadeProdutiva}"
+                                id="txtCapacidadeProdutiva" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtStatus"><b>STATUS:</b></label>
+                            <select th:field="*{status}" class="form-select" aria-label="Default select example"
+                                style="border: 1.2px solid; border-color: #F5821F;" required>
+                                <option value="">Selecione</option>
+                                <option value="Ativo">Ativo</option>
+                                <option value="Parado">Parado</option>
+                                <option value="Manutencao">Manutenção</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="container text-center">
+                <button type="submit" class="btn btn-primary"
+                    style="background-color: #F5821F; color: white; border-color: #F5821F;">
+                    <b>Cadastrar Equipamento</b>
+                </button>
+            </div>
+
+        </form>
+    </main>
+    <div th:include="layout :: footer">(footer)</div>
+    <script th:src="@{/EquipamentoScript.js}"></script>
+</body>
+
+</html>

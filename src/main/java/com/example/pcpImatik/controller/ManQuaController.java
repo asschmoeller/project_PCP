@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/cadastrosbasicos")
+@RequestMapping("/manutencaoequalidade")
 
-public class CadastrosBasicosController {
+public class ManQuaController {
     @GetMapping
     public ModelAndView index() {
 
 
-        return new ModelAndView("cadastrosBasicos/index");
+        return new ModelAndView("manutencaoequalidade/index");
     }    
 }
