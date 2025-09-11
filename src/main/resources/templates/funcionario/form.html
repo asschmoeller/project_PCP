@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+
+<head th:include="layout :: htmlhead"></head>
+
+<body>
+    <nav th:replace="layout :: menu">(menu)</nav>
+    <main class="container">
+        <form th:action="@{/funcionarios}" method="POST" th:object="${funcionario}">
+
+            <input type="hidden" th:field="*{id}">
+            <br>
+            <div class="container text-left">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtNome"><b>NOME DO FUNCIONÁRIO:</b></label>
+                            <input type="text" class="form-control" style="border: 1.2px solid; border-color: #F5821F;"
+                                th:field="*{nomeFuncionario}" id="txtNome" required>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtCPF"><b>CPF:</b></label>
+                            <input type="number" class="form-control"
+                                style="border: 1.2px solid; border-color: #F5821F;" th:field="*{CPF}" id="txtCPF"
+                                required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtCargo"><b>CARGO:</b></label>
+                            <input type="text" step="any" class="form-control"
+                                style="border: 1.2px solid; border-color: #F5821F;" th:field="*{cargo}" id="txtCargo"
+                                required>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtDataAdmissao"><b>DATA DE ADMISSÃO:</b></label>
+                            <input type="date" step="1" class="form-control"
+                                style="border: 1.2px solid; border-color: #F5821F;" th:field="*{dataAdmissao}"
+                                id="txtDataAdmissao" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtSetor"><b>SETOR:</b></label>
+                            <input type="text" class="form-control" style="border: 1.2px solid; border-color: #F5821F;"
+                                th:field="*{setor}" id="txtSetor" required>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtEndereco"><b>ENDEREÇO:</b></label>
+                            <input type="text" class="form-control" style="border: 1.2px solid; border-color: #F5821F;"
+                                th:field="*{endereco}" id="txtEndereco" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtTelefone"><b>TELEFONE:</b></label>
+                            <input type="text" step="1" class="form-control"
+                                style="border: 1.2px solid; border-color: #F5821F;" th:field="*{telefone}"
+                                id="txtTelefone" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtStatus"><b>STATUS:</b></label>
+                            <select th:field="*{status}" class="form-select" aria-label="Default select example"
+                                style="border: 1.2px solid; border-color: #F5821F;" required>
+                                <option value="">Selecione</option>
+                                <option value="Ativo">Ativo</option>
+                                <option value="Inativo">Inativo</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+                <br>
+                <div class="container text-center">
+                    <button type="submit" class="btn btn-primary"
+                        style="background-color: #F5821F; color: white; border-color: #F5821F;">
+                        <b>Cadastrar Funcionário</b>
+                    </button>
+                </div>
+
+        </form>
+    </main>
+    <div th:include="layout :: footer">(footer)</div>
+</body>
+
+</html>
