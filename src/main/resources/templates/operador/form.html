@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+
+<head th:include="layout :: htmlhead"></head>
+
+<body>
+    <nav th:replace="layout :: menu">(menu)</nav>
+    <main class="container">
+        <form th:action="@{/operadores}" method="POST" th:object="${operador}">
+
+            <input type="hidden" th:field="*{id}">
+            <br>
+            <div class="container text-left">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtFuncionario"><b>FUNCIONÁRIO:</b></label>
+                            <select class="form-select" aria-label="Default select example"
+                                style="border: 1.2px solid; border-color: #F5821F" th:field="*{funcionario}">
+                                <option th:each="umaFuncionario : ${listaFuncionario}" th:value="${umaFuncionario.id}"
+                                    th:text="${umaFuncionario.nomeFuncionario}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtEquipamento"><b>EQUIPAMENTOS:</b></label>
+                            <select id="equipamentos" class="form-select" name="equipamentosIds" multiple>
+                                <option th:each="mp : ${listaEquipamento}" th:value="${mp.id}"
+                                    th:text="${mp.nomeEquipamento}"
+                                    th:selected="${operador.equipamentos != null and operador.equipamentos.contains(mp)}">
+                                </option>
+                            </select>
+                            <div id="equipamentosSelecionados" class="mt-2"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtTurnoTrabalho"><b>TURNO DE TRABALHO:</b></label>
+                            <input type="text" class="form-control" style="border: 1.2px solid; border-color: #F5821F;"
+                                th:field="*{turnoTrabalho}" id="txtTurnoTrabalho" required>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtCargaHoraria"><b>CARGA HORÁRIA:</b></label>
+                            <input type="number" class="form-control" style="border: 1.2px solid; border-color: #F5821F;"
+                                th:field="*{cargaHoraria}" id="txtCargaHoraria" required>
+                        </div>
+                    </div>
+                </div>
+                    <br>
+                    <div class="container text-center">
+                        <button type="submit" class="btn btn-primary"
+                            style="background-color: #F5821F; color: white; border-color: #F5821F;">
+                            <b>Cadastrar Operador</b>
+                        </button>
+                    </div>
+
+        </form>
+    </main>
+    <div th:include="layout :: footer">(footer)</div>
+    <script th:src="@{/OperadorScript.js}"></script>
+</body>
+
+</html>
