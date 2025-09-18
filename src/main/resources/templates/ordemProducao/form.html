@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+
+<head th:include="layout :: htmlhead"></head>
+
+<body>
+    <nav th:replace="layout :: menu">(menu)</nav>
+    <main class="container">
+        <form th:action="@{/ordensProducao}" method="POST" th:object="${ordemProducao}">
+
+            <input type="hidden" th:field="*{id}">
+            <br>
+            <div class="container text-left">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtProduto"><b>PRODUTO:</b></label>
+                            <select class="form-select" aria-label="Default select example"
+                                style="border: 1.2px solid; border-color: #F5821F" th:field="*{produto}">
+                                <option th:each="umProduto : ${listaProduto}" th:value="${umProduto.id}"
+                                    th:text="${umProduto.nomeProduto}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtTempoPrevisto"><b>TEMPO PREVISTO:</b></label>
+                            <input type="number" class="form-control"
+                                style="border: 1.2px solid; border-color: #F5821F;" th:field="*{tempoPrevisto}"
+                                id="txtTempoPrevisto" required>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtQuantidade"><b>QUANTIDADE:</b></label>
+                            <input type="number" class="form-control"
+                                style="border: 1.2px solid; border-color: #F5821F;" th:field="*{quantidade}"
+                                id="txtQuantidade" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtDataInicio"><b>DATA INÍCIO:</b></label>
+                            <input type="date" class="form-control" style="border: 1.2px solid; border-color: #F5821F;"
+                                th:field="*{dataInicio}" id="txtDataInicio" required>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtDataFim"><b>DATA FIM:</b></label>
+                            <input type="date" class="form-control" style="border: 1.2px solid; border-color: #F5821F;"
+                                th:field="*{dataFim}" id="txtDataFim" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtDataInicio"><b>STATUS:</b></label>
+                            <select th:field="*{status}" class="form-select" aria-label="Default select example"
+                                style="border: 1.2px solid; border-color: #F5821F;" required>
+                                <option value="">Selecione</option>
+                                <option value="Planejada">Planejada</option>
+                                <option value="EmProducao">Em Produção</option>
+                                <option value="Finalizada">Finalizada</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtOperador"><b>OPERADOR RESPONSÁVEL:</b></label>
+                            <select class="form-select" aria-label="Default select example"
+                                style="border: 1.2px solid; border-color: #F5821F" th:field="*{operador}">
+                                <option th:each="umOperador : ${listaOperador}" th:value="${umOperador.id}"
+                                    th:text="${umOperador.Funcionario.nomeFuncionario}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="container text-center">
+                    <button type="submit" class="btn btn-primary"
+                        style="background-color: #F5821F; color: white; border-color: #F5821F;">
+                        <b>Cadastrar Ordem de Produção</b>
+                    </button>
+                </div>
+
+        </form>
+    </main>
+    <div th:include="layout :: footer">(footer)</div>
+</body>
+
+</html>

@@ -32,9 +32,6 @@ public class Funcionario{
     @NotBlank
     private String status;
 
-    //@ManyToMany(mappedBy = "materiasPrimas")
-    //private Set<Produto> produtos;
-
     public long getId() {
         return id;
     }

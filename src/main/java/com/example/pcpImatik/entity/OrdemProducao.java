@@ -1,9 +1,14 @@
 package com.example.pcpImatik.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 
 @Entity 
@@ -12,45 +17,45 @@ public class OrdemProducao{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private long tempoPrevisto;
-    private long idProduto; //esse do produto
-    private String equipamento;  //esse do equipamento
-    private String materiaPrima; //esse da matéria prima
+    @ManyToOne (cascade = {CascadeType.MERGE,
+        CascadeType.REFRESH})
+    private Produto produto;
+    @ManyToOne (cascade = {CascadeType.MERGE,
+        CascadeType.REFRESH})
+    private Equipamento equipamento;
     private LocalDate dataInicio;
     private LocalDate dataFim;
-    private String status; //ver como coloca opção
+    @NotBlank
+    private String status;
+    @NotNull
     private int quantidade;
-    private String operador; //esse do operador
-
+    @ManyToOne (cascade = {CascadeType.MERGE,
+        CascadeType.REFRESH})
+    private Operador operador;
+    
     public long getId() {
         return id;
     }
     public void setId(long id) {
         this.id = id;
     }
-  
     public long getTempoPrevisto() {
         return tempoPrevisto;
     }
     public void setTempoPrevisto(long tempoPrevisto) {
         this.tempoPrevisto = tempoPrevisto;
     }
-    public long getIdProduto() {
-        return idProduto;
+    public Produto getProduto() {
+        return produto;
     }
-    public void setIdProduto(long idProduto) {
-        this.idProduto = idProduto;
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
-    public String getEquipamento() {
+    public Equipamento getEquipamento() {
         return equipamento;
     }
-    public void setEquipamento(String equipamento) {
+    public void setEquipamento(Equipamento equipamento) {
         this.equipamento = equipamento;
-    }
-    public String getMateriaPrima() {
-        return materiaPrima;
-    }
-    public void setMateriaPrima(String materiaPrima) {
-        this.materiaPrima = materiaPrima;
     }
     public LocalDate getDataInicio() {
         return dataInicio;
@@ -76,10 +81,12 @@ public class OrdemProducao{
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
-    public String getOperador() {
+    public Operador getOperador() {
         return operador;
     }
-    public void setOperador(String operador) {
+    public void setOperador(Operador operador) {
         this.operador = operador;
     }
+
+    
 }
