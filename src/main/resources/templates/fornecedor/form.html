@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+
+<head th:include="layout :: htmlhead"></head>
+
+<body>
+    <nav th:replace="layout :: menu">(menu)</nav>
+    <main class="container">
+        <form th:action="@{/fornecedores}" method="POST" th:object="${fornecedor}">
+
+            <input type="hidden" th:field="*{id}">
+            <br>
+            <div class="container text-left">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtCNPJ"><b>CNPJ:</b></label>
+                            <input type="number" class="form-control"
+                                style="border: 1.2px solid; border-color: #F5821F;" th:field="*{CNPJ}" id="txtCNPJ"
+                                required>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtRazaoSocial"><b>RAZÃO SOCIAL:</b></label>
+                            <input type="text" class="form-control" style="border: 1.2px solid; border-color: #F5821F;"
+                                th:field="*{razaoSocial}" id="txtRazaoSocial" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtNomeFantasia"><b>NOME FANTASIA:</b></label>
+                            <input type="text" step="any" class="form-control"
+                                style="border: 1.2px solid; border-color: #F5821F;" th:field="*{nomeFantasia}" id="txtNomeFantasia"
+                                required>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtEndereco"><b>ENDEREÇO:</b></label>
+                            <input type="text" step="1" class="form-control"
+                                style="border: 1.2px solid; border-color: #F5821F;" th:field="*{endereco}"
+                                id="txtEndereco" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtTelefone"><b>TELEFONE:</b></label>
+                            <input type="text" class="form-control" style="border: 1.2px solid; border-color: #F5821F;"
+                                th:field="*{telefone}" id="txtTelefone" required>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtEmail"><b>E-MAIL:</b></label>
+                            <input type="text" class="form-control" style="border: 1.2px solid; border-color: #F5821F;"
+                                th:field="*{email}" id="txtEmail" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtPessoaContato"><b>PESSOA CONTATO:</b></label>
+                            <input type="text" step="1" class="form-control"
+                                style="border: 1.2px solid; border-color: #F5821F;" th:field="*{pessoaContato}"
+                                id="txtPessoaContato" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="tipoFornecedor"><b>TIPO DE FORNECEDOR:</b></label>
+                            <select style="border: 1.2px solid; border-color: #F5821F;" th:field="*{tipoFornecedor}" class="form-control" id="tipoFornecedor">
+                                <option value="" disabled selected>Selecione</option>
+                                <option th:each="u : ${tipos}" th:value="${u}" th:text="${u.label}">Tipo</option>
+                            </select>
+                            <div th:if="${#fields.hasErrors('tipoFornecedor')}" th:errors="*{tipoFornecedor}"
+                                class="text-danger"></div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtStatus"><b>STATUS:</b></label>
+                            <select th:field="*{status}" class="form-select" aria-label="Default select example"
+                                style="border: 1.2px solid; border-color: #F5821F;" required>
+                                <option value="">Selecione</option>
+                                <option value="Ativo">Ativo</option>
+                                <option value="Inativo">Inativo</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="container text-center">
+                <button type="submit" class="btn btn-primary"
+                    style="background-color: #F5821F; color: white; border-color: #F5821F;">
+                    <b>Cadastrar Fornecedor</b>
+                </button>
+            </div>
+
+        </form>
+    </main>
+    <div th:include="layout :: footer">(footer)</div>
+</body>
+
+</html>

@@ -20,9 +20,6 @@ public class OrdemProducao{
     @ManyToOne (cascade = {CascadeType.MERGE,
         CascadeType.REFRESH})
     private Produto produto;
-    @ManyToOne (cascade = {CascadeType.MERGE,
-        CascadeType.REFRESH})
-    private Equipamento equipamento;
     private LocalDate dataInicio;
     private LocalDate dataFim;
     @NotBlank
@@ -50,12 +47,6 @@ public class OrdemProducao{
     }
     public void setProduto(Produto produto) {
         this.produto = produto;
-    }
-    public Equipamento getEquipamento() {
-        return equipamento;
-    }
-    public void setEquipamento(Equipamento equipamento) {
-        this.equipamento = equipamento;
     }
     public LocalDate getDataInicio() {
         return dataInicio;

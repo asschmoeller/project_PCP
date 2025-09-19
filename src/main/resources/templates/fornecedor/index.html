@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:include="layout :: htmlhead"></head>
+
+<body>
+  <nav th:replace="layout :: menu">(menu)</nav>
+  <main>
+
+    <div class="container text-center my-3">
+      <div class="mx-auto px-3 py-2"
+        style="font-weight: bold; background-color: #F2EDE8; border: 1px solid #9A9A9A; border-radius: 5px; max-width: 400px; width: 100%; height: auto; display: flex; align-items: center; justify-content: center;">
+        FORNECEDORES
+      </div>
+    </div>
+
+    <div class="container text-center" style="margin-left: 10px;">
+      <div class="row align-items-center">
+        <div class="col-md-4 d-flex justify-content-start">
+          <a th:href="@{/fornecedores/novo}">
+            <button type="submit" class="btn btn-primary"
+              style="color: black; background-color: rgba(245, 130, 31, 0.3); border: 1px solid #F5821F;">
+              <b>Cadastrar novo Fornecedor</b>
+            </button>
+          </a>
+        </div>
+        <div class="col-md-4 offset-md-4">
+          <form class="d-flex" method="get" th:action="@{/fornecedores}">
+            <input class="form-control me-2" type="search" name="nome"
+              placeholder="Digite o nome da razão social do fornecedor para pesquisar..." aria-label="Search">
+            <button class="btn btn-primary" type="submit" style="background-color: #F5821F; border-color: #F5821F;">Pesquisar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <table class="table" id="tabfornecedores">
+      <thead>
+        <tr>
+          <th>Código:</th>
+          <th>Razão Social:</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="umFornecedor : ${listaFornecedores}">
+          <td th:text="${umFornecedor.id}"></td>
+          <td th:text="${umFornecedor.razaoSocial}"></td>
+          <td><a th:href="@{'/fornecedores/alterar/' + 
+                            ${umFornecedor.id}}" class="btn btn-secondary"
+              style="color: black; background-color: rgba(245, 130, 31, 0.3); border: 1px solid #F5821F; margin-left: 5px;">
+              <b>Alterar</b>
+            </a>
+
+            <button th:data-id="${umFornecedor.id}" type="submit" class="btn btn-primary js-delete"
+              style="background-color: #ebb7b7; color: black; border-color: #BB0F0F;">
+              <b>Excluir</b>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+  <div class="modal" tabindex="-1" id="modalfornecedor">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Excluir Fornecedor</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Confirma a exclusão da fornecedor?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+          <button type="button" class="btn btn-primary" id="btnsim"
+            style="background-color: #ebb7b7; color: black; border-color: #BB0F0F;">
+            <b>Sim</b>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div th:include="layout :: footer">(footer)</div>
+  <script th:src="@{/FornecedorScript.js}"></script>
+</body>
+
+</html>

@@ -10,5 +10,5 @@ import com.example.pcpImatik.entity.OrdemProducao;
 @Repository
 public interface OrdemProducaoRepository
             extends JpaRepository<OrdemProducao, Long> {
-      Optional<OrdemProducao> findById(Long id);;
+      Optional<OrdemProducao> findById(long id);
 }

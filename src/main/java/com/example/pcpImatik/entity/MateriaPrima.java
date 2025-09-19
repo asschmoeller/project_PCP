@@ -23,7 +23,6 @@ public class MateriaPrima{
     private long id;
     @NotBlank
     private String nomeMateriaPrima;
-    @NotNull (message = "A Unidade de medida é obrigatória e deve ser positiva")
     @Enumerated(EnumType.STRING)
     private UnidadeMedida unidadeMedida;
     @NotNull (message = "O Preço Atual é obrigatório e deve ser positivo")
