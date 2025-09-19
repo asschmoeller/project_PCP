@@ -62,19 +62,45 @@
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label for="txtMateriaPrima"><b>MATÉRIA-PRIMA:</b></label>
-                            <select id="materiasPrimas" class="form-select" name="materiasPrimasIds" multiple>
+                            <label><b>MATÉRIA-PRIMA:</b></label>
+                            <select id="selectMateriaPrima" class="form-control"
+                                style="border: 1.2px solid; border-color: #F5821F;">
+                                <option value="">-- Selecione --</option>
                                 <option th:each="mp : ${listaMateriaPrima}" th:value="${mp.id}"
-                                    th:text="${mp.nomeMateriaPrima}"
-                                    th:selected="${produto.materiasPrimas != null and produto.materiasPrimas.contains(mp)}">
+                                    th:text="${mp.nomeMateriaPrima}">
                                 </option>
                             </select>
-                            <div id="materiasSelecionadas" class="mt-2"></div>
+
+                            <label class="mt-2"><b>QUANTIDADE:</b></label>
+                            <input type="number" step="0.01" min="0" id="quantidadeMateriaPrima" class="form-control"
+                                style="border: 1.2px solid; border-color: #F5821F;" />
+
+                            <button style="background-color: #000000; color: white; border-color: #F5821F;"type="button" class="btn btn-primary mt-2"
+                                id="btnAdicionarMateria">Adicionar</button>
                         </div>
+
+                        <!-- Aqui entram os selecionados -->
+                        <div id="materiasSelecionadas" class="mt-3">
+                            <div th:each="entry : ${quantidadesMateriaPrima}">
+                                <div class="mb-2">
+                                    <span class="badge bg-success me-2" th:if="${nomesMateriaPrima != null}"
+                                        th:text="|${nomesMateriaPrima[entry.key]} - ${entry.value}|">
+                                    </span>
+                                    <button type="button" class="btn btn-sm btn-danger ms-2 btnRemoverMateria" th:attr="data-id=${entry.key}">
+    Remover
+</button>
+
+
+                                    <input type="hidden" name="materiaPrimasIds" th:value="${entry.key}" />
+                                    <input type="hidden" th:name="'quantidades[' + ${entry.key} + ']'"
+                                        th:value="${entry.value}" />
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
-            <div id="materiasSelecionadas" class="mt-2"></div>
             <br>
             <div class="container text-center">
                 <button type="submit" class="btn btn-primary"
@@ -88,4 +114,5 @@
     <div th:include="layout :: footer">(footer)</div>
     <script th:src="@{/ProdutoScript.js}"></script>
 </body>
+
 </html>

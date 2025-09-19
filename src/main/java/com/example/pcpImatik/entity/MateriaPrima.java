@@ -1,15 +1,17 @@
 package com.example.pcpImatik.entity;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -23,6 +25,7 @@ public class MateriaPrima{
     private long id;
     @NotBlank
     private String nomeMateriaPrima;
+    @NotNull (message = "A Unidade de medida é obrigatória e deve ser positiva")
     @Enumerated(EnumType.STRING)
     private UnidadeMedida unidadeMedida;
     @NotNull (message = "O Preço Atual é obrigatório e deve ser positivo")
@@ -40,8 +43,9 @@ public class MateriaPrima{
     @Min(value = 1, message = "O estoque mínimo deve ser maior que zero")
     private Integer estoqueMinimo;
 
-    @ManyToMany(mappedBy = "materiasPrimas")
-    private Set<Produto> produtos;
+    @OneToMany(mappedBy = "materiaProdutoId.materiaPrima", cascade = CascadeType.ALL, orphanRemoval = true)
+private Set<MateriaPrimaProduto> materiaPrimaProdutos = new HashSet<>();
+
 
     public long getId() {
         return id;

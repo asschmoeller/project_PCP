@@ -1,16 +1,17 @@
 package com.example.pcpImatik.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -29,13 +30,8 @@ public class Produto{
     private String categoria; //opções ver o que colocar
     @NotBlank
     private String status;
-    @ManyToMany
-    @JoinTable(
-        name = "produto_materia_prima",
-        joinColumns = @JoinColumn(name = "produto_id"),
-        inverseJoinColumns = @JoinColumn(name = "materia_prima_id")
-    )
-    private Set<MateriaPrima> materiasPrimas;
+    @OneToMany(mappedBy = "materiaProdutoId.produto", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<MateriaPrimaProduto> produtoMateriaPrima = new HashSet<>();
     
     public long getId() {
         return id;
@@ -74,10 +70,10 @@ public class Produto{
     public void setUnidadeMedida(UnidadeMedida unidadeMedida) {
         this.unidadeMedida = unidadeMedida;
     }
-    public Set<MateriaPrima> getMateriasPrimas() {
-        return materiasPrimas;
+    public Set<MateriaPrimaProduto> getProdutoMateriaPrima() {
+        return produtoMateriaPrima;
     }
-    public void setMateriasPrimas(Set<MateriaPrima> materiasPrimas) {
-        this.materiasPrimas = materiasPrimas;
+    public void setProdutoMateriaPrima(Set<MateriaPrimaProduto> produtoMateriaPrima) {
+        this.produtoMateriaPrima = produtoMateriaPrima;
     }
 }
