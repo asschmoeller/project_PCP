@@ -4,19 +4,29 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity 
 public class Cliente{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String cnpj;
-    private String nome;
-    private String razao_social;
+    @NotNull (message = "o CNPJ é obrigatório")
+    private long CNPJ;
+    @NotBlank
+    private String razaoSocial;
+    @NotBlank
+    private String nomeFantasia;
+    @NotBlank
     private String endereco;
+    @NotBlank
     private String telefone;
+    @NotBlank
     private String email;
-    private String pessoa_contato;
+    @NotBlank
+    private String pessoaContato;
+    @NotBlank
     private String status;
 
     public long getId() {
@@ -25,60 +35,54 @@ public class Cliente{
     public void setId(long id) {
         this.id = id;
     }
-
-    public String getCnpj() {
-        return cnpj;
+    public long getCNPJ() {
+        return CNPJ;
     }
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
+    public void setCNPJ(long cNPJ) {
+        CNPJ = cNPJ;
     }
-
-    public String getNome() {
-        return nome;
+    public String getRazaoSocial() {
+        return razaoSocial;
     }
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setRazaoSocial(String razaoSocial) {
+        this.razaoSocial = razaoSocial;
     }
-
-    public void setRazao_social(String razao_social) {
-        this.razao_social = razao_social;
+    public String getNomeFantasia() {
+        return nomeFantasia;
     }
-    public String getRazao_social() {
-        return razao_social;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setNomeFantasia(String nomeFantasia) {
+        this.nomeFantasia = nomeFantasia;
     }
     public String getEndereco() {
         return endereco;
     }
-
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
     public String getTelefone() {
         return telefone;
     }
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
     public String getEmail() {
         return email;
     }
-
-    public void setPessoa_contato(String pessoa_contato) {
-        this.pessoa_contato = pessoa_contato;
+    public void setEmail(String email) {
+        this.email = email;
     }
-    public String getPessoa_contato() {
-        return pessoa_contato;
+    public String getPessoaContato() {
+        return pessoaContato;
     }
-
+    public void setPessoaContato(String pessoaContato) {
+        this.pessoaContato = pessoaContato;
+    }
     public String getStatus() {
         return status;
     }
     public void setStatus(String status) {
         this.status = status;
     }
+
+    
 }

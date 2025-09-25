@@ -10,48 +10,48 @@
     <div class="container text-center my-3">
       <div class="mx-auto px-3 py-2"
         style="font-weight: bold; background-color: #F2EDE8; border: 1px solid #9A9A9A; border-radius: 5px; max-width: 400px; width: 100%; height: auto; display: flex; align-items: center; justify-content: center;">
-        CLIENTES
+        SERVIÇOS
       </div>
     </div>
 
     <div class="container text-center" style="margin-left: 10px;">
       <div class="row align-items-center">
         <div class="col-md-4 d-flex justify-content-start">
-          <a th:href="@{/clientes/novo}">
+          <a th:href="@{/servicos/novo}">
             <button type="submit" class="btn btn-primary"
               style="color: black; background-color: rgba(245, 130, 31, 0.3); border: 1px solid #F5821F;">
-              <b>Cadastrar novo Cliente</b>
+              <b>Cadastrar novo Serviço</b>
             </button>
           </a>
         </div>
         <div class="col-md-4 offset-md-4">
-          <form class="d-flex" method="get" th:action="@{/clientes}">
+          <form class="d-flex" method="get" th:action="@{/servicos}">
             <input class="form-control me-2" type="search" name="nome"
-              placeholder="Digite o nome da razão social do cliente para pesquisar..." aria-label="Search">
+              placeholder="Digite o nome do serviço para pesquisar..." aria-label="Search">
             <button class="btn btn-primary" type="submit" style="background-color: #F5821F; border-color: #F5821F;">Pesquisar</button>
           </form>
         </div>
       </div>
     </div>
 
-    <table class="table" id="tabclientes">
+    <table class="table" id="tabservicos">
       <thead>
         <tr>
           <th>Código:</th>
-          <th>Razão Social:</th>
+          <th>Nome:</th>
         </tr>
       </thead>
       <tbody>
-        <tr th:each="umCliente : ${listaClientes}">
-          <td th:text="${umCliente.id}"></td>
-          <td th:text="${umCliente.razaoSocial}"></td>
-          <td><a th:href="@{'/clientes/alterar/' + 
-                            ${umCliente.id}}" class="btn btn-secondary"
+        <tr th:each="umServico : ${listaServicos}">
+          <td th:text="${umServico.id}"></td>
+          <td th:text="${umServico.nome}"></td>
+          <td><a th:href="@{'/servicos/alterar/' + 
+                            ${umServico.id}}" class="btn btn-secondary"
               style="color: black; background-color: rgba(245, 130, 31, 0.3); border: 1px solid #F5821F; margin-left: 5px;">
               <b>Alterar</b>
             </a>
 
-            <button th:data-id="${umCliente.id}" type="submit" class="btn btn-primary js-delete"
+            <button th:data-id="${umServico.id}" type="submit" class="btn btn-primary js-delete"
               style="background-color: #ebb7b7; color: black; border-color: #BB0F0F;">
               <b>Excluir</b>
             </button>
@@ -60,15 +60,15 @@
       </tbody>
     </table>
   </main>
-  <div class="modal" tabindex="-1" id="modalcliente">
+  <div class="modal" tabindex="-1" id="modalservico">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Excluir Cliente</h5>
+          <h5 class="modal-title">Excluir Serviço</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Confirma a exclusão da cliente?</p>
+          <p>Confirma a exclusão da serviço?</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
@@ -81,7 +81,7 @@
     </div>
   </div>
   <div th:include="layout :: footer">(footer)</div>
-  <script th:src="@{/ClienteScript.js}"></script>
+  <script th:src="@{/ServicoScript.js}"></script>
 </body>
 
 </html>

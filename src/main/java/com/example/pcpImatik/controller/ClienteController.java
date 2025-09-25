@@ -1,11 +1,14 @@
 package com.example.pcpImatik.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.pcpImatik.entity.Cliente;
@@ -20,11 +23,19 @@ public class ClienteController {
     private ClienteService service;
 
     @GetMapping
-    public ModelAndView index() {
+    public ModelAndView listarClientes(@RequestParam(required = false) String nome) {
+        List<Cliente> listaClientes;
 
-        var listaClientes = service.getAll();
+        if (nome != null && !nome.isEmpty()) {
+            listaClientes = service.findByNome(nome); // faço isso para habilitar a busca do nome do cliente
+                                                            // na página index
+        } else {
+            listaClientes = service.getAll();
+        }
 
-        return new ModelAndView("cliente/index", "listaClientes", listaClientes);
+        ModelAndView model = new ModelAndView("cliente/index");
+        model.addObject("listaClientes", listaClientes);
+        return model;
     }
 
     @GetMapping("/novo")

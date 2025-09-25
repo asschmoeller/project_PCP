@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+
+<head th:include="layout :: htmlhead"></head>
+
+<body>
+    <nav th:replace="layout :: menu">(menu)</nav>
+    <main class="container">
+        <form th:action="@{/ferramentas}" method="POST" th:object="${ferramenta}">
+
+            <input type="hidden" th:field="*{id}">
+            <br>
+            <div class="container text-left">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtNome"><b>NOME:</b></label>
+                            <input type="text" class="form-control"
+                                style="border: 1.2px solid; border-color: #F5821F;" th:field="*{nome}" id="txtNome"
+                                required>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtQuantidade"><b>QUANTIDADE:</b></label>
+                            <input type="number" class= "form-control" style="border: 1.2px solid; border-color: #F5821F;"
+                                th:field="*{quantidade}" id="txtQuantidade" required>
+                                <div th:if="${#fields.hasErrors('quantidade')}" th:errors="*{quantidade}"
+                                class="text-danger"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="tipoManFerramenta"><b>TIPO DE MANUTENÇÃO NECESSÁRIA:</b></label>
+                            <select th:field="*{tipoManFerramenta}" class="form-control" id="tipoManFerramenta" style="border: 1.2px solid; border-color: #F5821F;">
+                                <option value="" disabled selected>Selecione</option>
+                                <option th:each="u : ${tiposman}" th:value="${u}" th:text="${u.label}">Tipos</option>
+                            </select>
+                            <div th:if="${#fields.hasErrors('tipoManFerramenta')}" th:errors="*{tipoManFerramenta}"
+                                class="text-danger"></div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtVidaUtil"><b>VIDA ÚTIL ESTIMADA:</b></label>
+                            <input type="number" step="1" class="form-control"
+                                style="border: 1.2px solid; border-color: #F5821F;" th:field="*{vidaUtil}"
+                                id="txtVidaUtil" required>
+                                <div th:if="${#fields.hasErrors('vidaUtil')}" th:errors="*{vidaUtil}"
+                                class="text-danger"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtLocalizacao"><b>LOCALIZAÇÃO:</b></label>
+                            <input type="text" class="form-control" style="border: 1.2px solid; border-color: #F5821F;"
+                                th:field="*{localizacao}" id="txtLocalizacao" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="container text-center">
+                <button type="submit" class="btn btn-primary"
+                    style="background-color: #F5821F; color: white; border-color: #F5821F;">
+                    <b>Cadastrar Ferramenta</b>
+                </button>
+            </div>
+
+        </form>
+    </main>
+    <div th:include="layout :: footer">(footer)</div>
+</body>
+
+</html>

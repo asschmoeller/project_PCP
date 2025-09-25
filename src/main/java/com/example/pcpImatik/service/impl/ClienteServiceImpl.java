@@ -1,6 +1,8 @@
 package com.example.pcpImatik.service.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,5 +30,16 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public void delete(Cliente cliente) {
         repository.delete(cliente);
+    }
+
+    @Override
+    public List<Cliente> findByNome(String nome) {
+        return repository.findByRazaoSocialContainingIgnoreCase(nome);
+    }
+
+    @Override
+    public List<Cliente> findAllByIds(List<Long> ids) {
+        return StreamSupport.stream(repository.findAllById(ids).spliterator(), false)
+                .collect(Collectors.toList());
     }
 }

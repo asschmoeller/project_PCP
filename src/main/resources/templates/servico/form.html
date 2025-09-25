@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+
+<head th:include="layout :: htmlhead"></head>
+
+<body>
+    <nav th:replace="layout :: menu">(menu)</nav>
+    <main class="container">
+        <form th:action="@{/servicos}" method="POST" th:object="${servico}">
+
+            <input type="hidden" th:field="*{id}">
+            <br>
+            <div class="container text-left">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtNome"><b>NOME:</b></label>
+                            <input type="text" class="form-control"
+                                style="border: 1.2px solid; border-color: #F5821F;" th:field="*{nome}" id="txtNome"
+                                required>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtPreco"><b>PREÇO:</b></label>
+                            <input type="number" step="any" class="form-control" style="border: 1.2px solid; border-color: #F5821F;"
+                                th:field="*{preco}" id="txtPreco" required>
+                                <div th:if="${#fields.hasErrors('preco')}" th:errors="*{preco}"
+                                class="text-danger"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="txtTempo"><b>TEMPO ESTIMADO:</b></label>
+                            <input type="number" step="any" class="form-control"
+                                style="border: 1.2px solid; border-color: #F5821F;" th:field="*{tempo}" id="txtTempo"
+                                required>
+                                <div th:if="${#fields.hasErrors('tempo')}" th:errors="*{tempo}"
+                                class="text-danger"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="container text-center">
+                <button type="submit" class="btn btn-primary"
+                    style="background-color: #F5821F; color: white; border-color: #F5821F;">
+                    <b>Cadastrar Serviço</b>
+                </button>
+            </div>
+
+        </form>
+    </main>
+    <div th:include="layout :: footer">(footer)</div>
+</body>
+
+</html>
